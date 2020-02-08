@@ -48,4 +48,17 @@ app.get('/todos', (req, res) => {
   })
 })
 
+app.post('/addTodo', (req, res) => {
+  const collection = client.db('todo-example').collection('todos')
+  var todo = req.body.todo // parse the data from the request's body
+  collection.insertOne({title: todo}, function (err, results) {
+    if (err) {
+      console.log(err)
+      res.send('')
+      return
+    }
+    res.send(results.ops[0]) // returns the new document
+  })
+})
+
 app.listen(process.env.PORT || 8081) // client is already running on 8080
