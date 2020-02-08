@@ -5,8 +5,8 @@
       <input type='submit' />
     </form>
     <ul>
-      <li v-for='todo in todos' :key="todo">
-        <span>{{todo}}</span>
+      <li v-for='todo in todos' :key='todo._id'>
+        <input type='checkbox' @click='deleteTodo(todo._id)'> {{todo.title}}
       </li>
     </ul>
   </div>
@@ -29,6 +29,13 @@ export default {
       const response = await ToDoAPI.addTodo(this.newTodo)
       this.todos.push(response.data)
       this.newTodo = '' // clear the input field
+    },
+    deleteTodo (todoID) {
+      ToDoAPI.deleteTodo(todoID)
+      // remove the array element with the matching id
+      this.todos = this.todos.filter(function (obj) {
+        return obj._id !== todoID
+      })
     },
     async loadTodos () {
       const response = await ToDoAPI.getToDos()

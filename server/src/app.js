@@ -61,4 +61,17 @@ app.post('/addTodo', (req, res) => {
   })
 })
 
+app.post('/deleteTodo', (req, res) => {
+  const collection = client.db('todo-example').collection('todos')
+  // remove document by its unique _id
+  collection.removeOne({'_id': mongo.ObjectID(req.body.todoID)}, function (err, results) {
+    if (err) {
+      console.log(err)
+      res.send('')
+      return
+    }
+    res.send() // return
+  })
+})
+
 app.listen(process.env.PORT || 8081) // client is already running on 8080
