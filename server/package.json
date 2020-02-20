@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js",
+    "start": "node src/app.js",
+    "start-dev": "./node_modules/nodemon/bin/nodemon.js src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,5 +18,8 @@
     "mongodb": "^3.5.2",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }
